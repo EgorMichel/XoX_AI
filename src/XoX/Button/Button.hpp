@@ -20,12 +20,14 @@ enum class Button_Type{
 
 
 class Button {
-protected:
+private:
     sf::RectangleShape rectangle;
     Button_Type type = Button_Type::None;
+    sf::Font font;
+    sf::Text text;
     bool status;
 public:
-    Button(float Width, float Height, float x, float y, sf::Color color, Button_Type type);
+    Button(float Width, float Height, float x, float y, sf::Color color, Button_Type type, std::string string1);
     bool is_pushed(sf::Vector2<int> point);
     void draw(sf::RenderWindow * window);
     void set_status(bool stat);

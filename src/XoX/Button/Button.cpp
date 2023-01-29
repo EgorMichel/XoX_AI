@@ -10,7 +10,15 @@ bool Button::is_pushed(sf::Vector2<int> point) {
     && rectangle.getPosition().y < point.y && point.y < rectangle.getPosition().y + rectangle.getSize().y);
 }
 
-Button::Button(float width, float height, float x, float y, sf::Color color, Button_Type type_) {
+
+Button::Button(float width, float height, float x, float y, sf::Color color, Button_Type type_, std::string string1) {
+
+    font.loadFromFile("../Font/Impact.ttf");
+    text.setFont(font);
+    text.setCharacterSize(32);
+    text.setPosition(x, y);
+    text.setString(string1);
+
     type = type_;
     status = false;
     rectangle.setSize(sf::Vector2f(width, height));
@@ -22,6 +30,7 @@ Button::Button(float width, float height, float x, float y, sf::Color color, But
 
 void Button::draw(sf::RenderWindow *window) {
     window->draw(rectangle);
+    window->draw(text);
 }
 
 Button_Type Button::get_type(){

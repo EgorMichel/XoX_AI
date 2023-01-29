@@ -5,7 +5,6 @@
 #include "src/XoX/Game/Game.hpp"
 
 int main(){
-
     Game game;
 
     while (game.isRunning()){
@@ -13,7 +12,6 @@ int main(){
         game.Events();
         game.AI_Move();
     }
-
 
     return 0;
 }

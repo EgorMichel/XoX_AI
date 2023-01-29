@@ -8,7 +8,3 @@ add_subdirectory(src)
 add_executable(XoXAI main.cpp)
 
 target_link_libraries(XoXAI XoX)
-
-
-
-

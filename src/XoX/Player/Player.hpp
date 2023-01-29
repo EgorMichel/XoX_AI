@@ -7,7 +7,7 @@
 
 #include <array>
 
-#include "XoX/Check_Win/Check_Win.hpp"
+#include "../Check_Win/Check_Win.hpp"
 
 struct LinesAndChecks {
     int our_lines = 0;
