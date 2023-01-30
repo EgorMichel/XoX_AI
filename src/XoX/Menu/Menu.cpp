@@ -21,9 +21,9 @@ Menu::Menu(float ScreenWidth, float ScreenHeight){
     Buttons.push_back(Button(w, h, x0, y0 + 2 * y_shift, sf::Color(100, 100, 200),
                              Button_Type::AvA, "                  AI vs AI"));
     Buttons.push_back(Button(h, h, x0, ScreenHeight - y0 * 4, sf::Color(100, 100, 100),
-                             Button_Type::Back, "  <="));
+                             Button_Type::Back, "<="));
     Buttons.push_back(Button(h, h, x0 + ScreenWidth / 5 * 2 - y0 * 2, ScreenHeight - y0 * 4, sf::Color(100, 100, 100),
-                             Button_Type::Fwd, "  =>"));
+                             Button_Type::Fwd, " =>"));
 
     for(auto & Button : Buttons){
         Button.text.setFont(Button.font);
