@@ -27,14 +27,13 @@ private:
     sf::Text text;
     bool status;
 public:
-    Button(float Width, float Height, float x, float y, sf::Color color, Button_Type type, std::string string1);
+    Button(float Width, float Height, float x, float y, sf::Color color, Button_Type type, const std::string& string1);
     bool is_pushed(sf::Vector2<int> point);
     void draw(sf::RenderWindow * window);
     void set_status(bool stat);
     bool get_status() const;
     Button_Type get_type();
+    friend class Menu;
 };
-
-
 
 #endif //XOXAI_BUTTON_HPP

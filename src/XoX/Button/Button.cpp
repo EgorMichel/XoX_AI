@@ -3,6 +3,7 @@
 //
 
 #include "Button.hpp"
+#include "iostream"
 
 
 bool Button::is_pushed(sf::Vector2<int> point) {
@@ -11,13 +12,16 @@ bool Button::is_pushed(sf::Vector2<int> point) {
 }
 
 
-Button::Button(float width, float height, float x, float y, sf::Color color, Button_Type type_, std::string string1) {
+Button::Button(float width, float height, float x, float y, sf::Color color, Button_Type type_, const std::string& string1) {
 
-    font.loadFromFile("../Font/Impact.ttf");
-    text.setFont(font);
-    text.setCharacterSize(32);
-    text.setPosition(x, y);
+    if (!font.loadFromFile("../Font/Impact.ttf")) {
+        std::cout << "LoL didn't read" << std::endl;
+        exit(0);
+    }
+    text.setFillColor(sf::Color::White);
     text.setString(string1);
+    text.setCharacterSize(height * 0.8);
+    text.setPosition(x, y);
 
     type = type_;
     status = false;
@@ -26,6 +30,7 @@ Button::Button(float width, float height, float x, float y, sf::Color color, But
     rectangle.setPosition(x, y);
     rectangle.setFillColor(color);
     rectangle.setOutlineColor(sf::Color::Black);
+
 }
 
 void Button::draw(sf::RenderWindow *window) {

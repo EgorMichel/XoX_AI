@@ -13,31 +13,21 @@ Menu::Menu(float ScreenWidth, float ScreenHeight){
     float y_shift = ScreenHeight / 19 + y0;
 
     Buttons.push_back(Button(w, h, x0, y0, sf::Color(200, 100, 100),
-                             Button_Type::PvP, "Player vs Player"));
+                             Button_Type::PvP, "        Player vs Player"));
     Buttons.push_back(Button(w / 3, h, x0, y0 + y_shift,sf::Color(100, 200, 100),
-                             Button_Type::PvA, "PvA"));
+                             Button_Type::PvA, "     PvA"));
     Buttons.push_back(Button(w / 3, h, x0 + w / 3 * 2, y0 + y_shift, sf::Color(100, 200, 100),
-                             Button_Type::AvP, "AvP"));
+                             Button_Type::AvP, "     AvP"));
     Buttons.push_back(Button(w, h, x0, y0 + 2 * y_shift, sf::Color(100, 100, 200),
-                             Button_Type::AvA, "AvA"));
+                             Button_Type::AvA, "                  AI vs AI"));
     Buttons.push_back(Button(h, h, x0, ScreenHeight - y0 * 4, sf::Color(100, 100, 100),
-                             Button_Type::Back, "<-"));
+                             Button_Type::Back, "  <="));
     Buttons.push_back(Button(h, h, x0 + ScreenWidth / 5 * 2 - y0 * 2, ScreenHeight - y0 * 4, sf::Color(100, 100, 100),
-                             Button_Type::Fwd, "->"));
+                             Button_Type::Fwd, "  =>"));
 
-
-//    Buttons.emplace_back(w, h, x0, y0,
-//                         sf::Color(200, 100, 100), Button_Type::PvP, "Player vs Player");
-//    Buttons.emplace_back(w / 3, h, x0, y0 + y_shift,
-//                         sf::Color(100, 200, 100), Button_Type::PvA, "PvA");
-//    Buttons.emplace_back(w / 3, h, x0 + w / 3 * 2, y0 + y_shift,
-//                         sf::Color(100, 200, 100), Button_Type::AvP, "AvP");
-//    Buttons.emplace_back(w, h, x0, y0 + 2 * y_shift,
-//                         sf::Color(100, 100, 200), Button_Type::AvA, "AvA");
-//    Buttons.emplace_back(h, h, x0, ScreenHeight - y0 * 4,
-//                         sf::Color(100, 100, 100), Button_Type::Back, "<-");
-//    Buttons.emplace_back(h, h, x0 + ScreenWidth / 5 * 2 - y0 * 2, ScreenHeight - y0 * 4,
-//                         sf::Color(100, 100, 100), Button_Type::Fwd, "->");
+    for(auto & Button : Buttons){
+        Button.text.setFont(Button.font);
+    }
 
 }
 
