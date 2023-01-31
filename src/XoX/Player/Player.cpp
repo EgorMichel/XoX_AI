@@ -418,6 +418,7 @@ LinesAndChecks Player::count_lines_and_checks(const Matrix & matrix) const {
 std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const {
     int tmp_us = 0, tmp_op = 0;
     std::array <int, 3> res = {-1, -1, -1};
+    std::array<int, 3> opp_move = {-1, -1, -1};
 
     for (int i = 0; i < 4; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -431,7 +432,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
                 else res = {k, i, j};
             }
             if (tmp_op == 0 && tmp_us == 3) return {res, side};
-            if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+            if (tmp_us == 0 && tmp_op == 3) opp_move = res;
             tmp_us = 0;
             tmp_op = 0;
 
@@ -444,7 +445,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
                 else res = {i, k, j};
             }
             if (tmp_op == 0 && tmp_us == 3) return {res, side};
-            if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+            if (tmp_us == 0 && tmp_op == 3) opp_move = res;
             tmp_us = 0;
             tmp_op = 0;
 
@@ -457,7 +458,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
                 else res = {i, j, k};
             }
             if (tmp_op == 0 && tmp_us == 3) return {res, side};
-            if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+            if (tmp_us == 0 && tmp_op == 3) opp_move = res;
             tmp_us = 0;
             tmp_op = 0;
         }
@@ -474,7 +475,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
             else res = {i, k, k};
         }
         if (tmp_op == 0 && tmp_us == 3) return {res, side};
-        if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+        if (tmp_us == 0 && tmp_op == 3) opp_move = res;
         tmp_us = 0;
         tmp_op = 0;
 
@@ -487,7 +488,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
             else res = {i, 3 - k, k};
         }
         if (tmp_op == 0 && tmp_us == 3) return {res, side};
-        if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+        if (tmp_us == 0 && tmp_op == 3) opp_move = res;
         tmp_us = 0;
         tmp_op = 0;
 
@@ -500,7 +501,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
             else res = {k, i, k};
         }
         if (tmp_op == 0 && tmp_us == 3) return {res, side};
-        if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+        if (tmp_us == 0 && tmp_op == 3) opp_move = res;
         tmp_us = 0;
         tmp_op = 0;
 
@@ -513,7 +514,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
             else res = {3 - k, i, k};
         }
         if (tmp_op == 0 && tmp_us == 3) return {res, side};
-        if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+        if (tmp_us == 0 && tmp_op == 3) opp_move = res;
         tmp_us = 0;
         tmp_op = 0;
 
@@ -526,7 +527,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
             else res = {k, k, i};
         }
         if (tmp_op == 0 && tmp_us == 3) return {res, side};
-        if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+        if (tmp_us == 0 && tmp_op == 3) opp_move = res;
         tmp_us = 0;
         tmp_op = 0;
 
@@ -539,7 +540,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
             else res = {3 - k, k, i};
         }
         if (tmp_op == 0 && tmp_us == 3) return {res, side};
-        if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+        if (tmp_us == 0 && tmp_op == 3) opp_move = res;
         tmp_us = 0;
         tmp_op = 0;
 
@@ -554,7 +555,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
         else res = {k, k, k};
     }
     if (tmp_op == 0 && tmp_us == 3) return {res, side};
-    if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+    if (tmp_us == 0 && tmp_op == 3) opp_move = res;
     tmp_us = 0;
     tmp_op = 0;
 
@@ -567,7 +568,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
         else res = {3 - k, k, k};
     }
     if (tmp_op == 0 && tmp_us == 3) return {res, side};
-    if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+    if (tmp_us == 0 && tmp_op == 3) opp_move = res;
     tmp_us = 0;
     tmp_op = 0;
 
@@ -580,7 +581,7 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
         else res = {k, 3 - k, k};
     }
     if (tmp_op == 0 && tmp_us == 3) return {res, side};
-    if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+    if (tmp_us == 0 && tmp_op == 3) opp_move = res;
     tmp_us = 0;
     tmp_op = 0;
 
@@ -593,21 +594,67 @@ std::pair< std::array<int, 3>, int>  Player::can_win(const Matrix &matrix) const
         else res = {3 - k, 3 - k, k};
     }
     if (tmp_op == 0 && tmp_us == 3) return {res, side};
-    if (tmp_us == 0 && tmp_op == 3) return {res, -side};
+    if (tmp_us == 0 && tmp_op == 3) opp_move = res;
 
 //    tmp_check1 = {-1, -1, -1};
 //    tmp_check2 = {-1, -1, -1};
 //    tmp_us = 0;
 //    tmp_op = 0;
 
+    if (opp_move[0] != -1){
+        return {opp_move, -side};
+    }
     return {{-1, -1, -1}, 0};
 }
+
+
+bool Player::deep_analysis(const Matrix &field, int iteration, std::array<int, 3> * winning_move) const{
+    auto possible_win = can_win(field);
+    if(possible_win.second == side){
+        return true;
+    }
+    if (iteration > 20) return false;
+    LinesAndChecks checks = count_lines_and_checks(field);
+    iteration += 1;
+
+    for (auto & our_check : checks.our_checks){
+        Matrix matrix = field;
+        matrix.m[our_check[0]][our_check[1]][our_check[2]] = side;
+        auto tmp = can_win(matrix);
+        matrix.m[tmp.first[0]][tmp.first[1]][tmp.first[2]] = -side;
+        tmp = can_win(matrix);
+        if (tmp.second == -side){
+            matrix.m[tmp.first[0]][tmp.first[1]][tmp.first[2]] = side;
+            tmp = can_win(matrix);
+            if (tmp.second == side){
+                matrix.m[tmp.first[0]][tmp.first[1]][tmp.first[2]] = -side;
+                if (deep_analysis(matrix, iteration, winning_move)){
+                    *winning_move = our_check;
+                    return true;
+                }
+            }
+            else return false;
+        }
+        else if (deep_analysis(matrix, iteration, winning_move)){
+            *winning_move = our_check;
+            return true;
+        }
+    }
+
+    return false;
+}
+
 
 std::array<int, 3> Player::make_move(const Field &field) const{
     Matrix matrix = field.bare_matrix();
     auto tmp_ = can_win(matrix);
     if (tmp_.second != 0){
         return tmp_.first;
+    }
+
+    std::array<int, 3> move = {0};
+    if (deep_analysis(matrix, 0, &move)){
+        return move;
     }
     int counts[4][4][4] = {0};
     int max = -1000;
@@ -645,3 +692,4 @@ void Player::set_side(int s) {
 int Player::get_side() const {
     return side;
 }
+

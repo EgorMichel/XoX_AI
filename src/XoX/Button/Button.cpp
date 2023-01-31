@@ -14,14 +14,14 @@ bool Button::is_pushed(sf::Vector2<int> point) {
 
 Button::Button(float width, float height, float x, float y, sf::Color color, Button_Type type_, const std::string& string1) {
 
-    if (!font.loadFromFile("../Font/Impact.ttf")) {
+    if (!font.loadFromFile("../Font/arial.ttf")) {
         std::cout << "LoL didn't read" << std::endl;
         exit(0);
     }
     text.setFillColor(sf::Color::White);
     text.setString(string1);
     text.setCharacterSize(height * 0.8);
-    text.setPosition(x, y);
+    text.setPosition(x + width / 2 - string1.size() * height * 0.17, y);
 
     type = type_;
     status = false;

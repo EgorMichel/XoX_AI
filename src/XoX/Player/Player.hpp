@@ -26,6 +26,7 @@ private:
     int side = 0;
     [[nodiscard]] LinesAndChecks count_lines_and_checks(const Matrix & matrix) const; // [0] - lines for x, [1] - lines for o
     [[nodiscard]] std::pair< std::array<int, 3>, int> can_win(const Matrix & matrix) const;
+    bool deep_analysis(const Matrix & field, int iteration, std::array<int, 3> * winning_move) const;
 public:
     Player() = default;
     explicit Player(int side);
