@@ -623,6 +623,7 @@ bool Player::deep_analysis(const Matrix &field, int iteration, std::array<int, 3
         auto tmp = can_win(matrix);
         matrix.m[tmp.first[0]][tmp.first[1]][tmp.first[2]] = -side;
         tmp = can_win(matrix);
+
         if (tmp.second == -side){
             matrix.m[tmp.first[0]][tmp.first[1]][tmp.first[2]] = side;
             tmp = can_win(matrix);
@@ -635,6 +636,7 @@ bool Player::deep_analysis(const Matrix &field, int iteration, std::array<int, 3
             }
             else return false;
         }
+
         else if (deep_analysis(matrix, iteration, winning_move)){
             *winning_move = our_check;
             return true;
@@ -645,14 +647,15 @@ bool Player::deep_analysis(const Matrix &field, int iteration, std::array<int, 3
 }
 
 
-std::array<int, 3> Player::make_move(const Field &field) const{
+std::array<int, 3> Player::make_move(const Field &field){
     Matrix matrix = field.bare_matrix();
+    std::array<int, 3> move = {0};
+    std::array<int, 3> concede_move = {0};
     auto tmp_ = can_win(matrix);
     if (tmp_.second != 0){
         return tmp_.first;
     }
 
-    std::array<int, 3> move = {0};
     if (deep_analysis(matrix, 0, &move)){
         return move;
     }
@@ -673,6 +676,7 @@ std::array<int, 3> Player::make_move(const Field &field) const{
                     matrix.m[i][j][k] = 0;
 
                     if(max < counts[i][j][k]){
+                        concede_move = {max_index[0], max_index[1], max_index[2]};
                         max = counts[i][j][k];
                         max_index[0] = i; max_index[1] = j; max_index[2] = k;
                         candidates.clear();
@@ -688,11 +692,18 @@ std::array<int, 3> Player::make_move(const Field &field) const{
         }
     }
 
+    side *= -1;
+
+    if (deep_analysis(matrix, 0, &move)){
+        side *= -1;
+        return move;
+    }
+
+    side *= -1;
+
     std::srand( time(nullptr) );
 
     return candidates[std::rand() % candidates.size()];
-
-//    return {max_index[0], max_index[1], max_index[2]};
 }
 
 Player::Player(int side) : side(side){}

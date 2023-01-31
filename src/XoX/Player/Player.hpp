@@ -8,6 +8,7 @@
 #include <array>
 #include <ctime>
 #include <random>
+#include <iostream>
 
 #include "../Check_Win/Check_Win.hpp"
 
@@ -19,22 +20,33 @@ struct LinesAndChecks {
 };
 
 
-/**
- * @make_move - returns an std::array<int, 3> coordinates of a move
- */
+
 class Player {
 
 private:
+
     int side = 0;
+
     [[nodiscard]] LinesAndChecks count_lines_and_checks(const Matrix & matrix) const; // [0] - lines for x, [1] - lines for o
+
     [[nodiscard]] std::pair< std::array<int, 3>, int> can_win(const Matrix & matrix) const;
+
     bool deep_analysis(const Matrix & field, int iteration, std::array<int, 3> * winning_move) const;
+
 public:
+
     Player() = default;
+
     explicit Player(int side);
+
     void set_side(int side);
+
     [[nodiscard]] int get_side() const;
-    [[nodiscard]] std::array<int, 3> make_move(const Field & f) const;
+
+    /**
+     * @returns an std::array<int, 3> coordinates of a move
+     */
+    [[nodiscard]] std::array<int, 3> make_move(const Field & f);
 };
 
 

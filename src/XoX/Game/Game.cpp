@@ -39,6 +39,17 @@ void Game::make_move(std::array<int, 3> move) {
             current_player = 0;
             return;
         }
+        bool is_zeros = false;
+        for (int i = 0; i < 4; ++i){
+            for (int j = 0; j < 4; ++j){
+                for (int k = 0; k < 4; ++k){
+                    if(field.matrix[i][j][k].status == 0) is_zeros = true;
+                }
+            }
+        }
+        if (!is_zeros){
+            game_mode = Game_modes::end;
+        }
         current_player *= -1;
     }
 }
