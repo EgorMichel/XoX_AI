@@ -6,6 +6,8 @@
 #define XOXAI_TEST_PLAYER_HPP
 
 #include <array>
+#include <ctime>
+#include <random>
 
 #include "../Check_Win/Check_Win.hpp"
 

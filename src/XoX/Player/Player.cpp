@@ -656,6 +656,8 @@ std::array<int, 3> Player::make_move(const Field &field) const{
     if (deep_analysis(matrix, 0, &move)){
         return move;
     }
+
+    std::vector< std::array<int, 3> > candidates;
     int counts[4][4][4] = {0};
     int max = -1000;
     int max_index[3] = {0};
@@ -673,6 +675,12 @@ std::array<int, 3> Player::make_move(const Field &field) const{
                     if(max < counts[i][j][k]){
                         max = counts[i][j][k];
                         max_index[0] = i; max_index[1] = j; max_index[2] = k;
+                        candidates.clear();
+                        candidates.emplace_back( std::array< int, 3 > {i, j, k} );
+                    }
+
+                    if(max == counts[i][j][k]){
+                        candidates.emplace_back( std::array< int, 3 > {i, j, k} );
                     }
 
                 }
@@ -680,7 +688,11 @@ std::array<int, 3> Player::make_move(const Field &field) const{
         }
     }
 
-    return {max_index[0], max_index[1], max_index[2]};
+    std::srand( time(nullptr) );
+
+    return candidates[std::rand() % candidates.size()];
+
+//    return {max_index[0], max_index[1], max_index[2]};
 }
 
 Player::Player(int side) : side(side){}
