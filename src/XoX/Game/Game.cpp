@@ -29,7 +29,17 @@ void Game::make_move(std::array<int, 3> move) {
 
     if (field.matrix[move[0]][move[1]][move[2]].status == 0){
         field.matrix[move[0]][move[1]][move[2]].status = current_player;
+
+        for (auto & i : field.matrix){
+            for (auto & j : i){
+                for (auto & k : j){
+                    k.highlight(false);
+                }
+            }
+        }
+
         moves_history.emplace_back(move);
+        field.matrix[move[0]][move[1]][move[2]].highlight(true);
         auto win_line = CheckWin(field.bare_matrix());
         if (win_line[0][0] != -1){
             for (auto p : win_line){
@@ -39,6 +49,7 @@ void Game::make_move(std::array<int, 3> move) {
             current_player = 0;
             return;
         }
+
         bool is_zeros = false;
         for (int i = 0; i < 4; ++i){
             for (int j = 0; j < 4; ++j){
@@ -50,6 +61,7 @@ void Game::make_move(std::array<int, 3> move) {
         if (!is_zeros){
             game_mode = Game_modes::end;
         }
+
         current_player *= -1;
     }
 }
@@ -106,6 +118,7 @@ void Game::Events() {
                     switch (tmp) {
                         case Button_Type::PvP:
                             game_mode = Game_modes::PvP;
+                            moves_history.clear();
                             player.set_side(0);
                             field.refresh();
                             current_player = 1;
@@ -113,6 +126,7 @@ void Game::Events() {
 
                         case Button_Type::PvA:
                             game_mode = Game_modes::PvA;
+                            moves_history.clear();
                             player.set_side(-1);
                             field.refresh();
                             current_player = 1;
@@ -120,6 +134,7 @@ void Game::Events() {
 
                         case Button_Type::AvP:
                             game_mode = Game_modes::AvP;
+                            moves_history.clear();
                             player.set_side(1);
                             field.refresh();
                             current_player = 1;
@@ -127,6 +142,7 @@ void Game::Events() {
 
                         case Button_Type::AvA:
                             game_mode = Game_modes::AvA;
+                            moves_history.clear();
                             player.set_side(1);
                             player2.set_side(-1);
                             field.refresh();

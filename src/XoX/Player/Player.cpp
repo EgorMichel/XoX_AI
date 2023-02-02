@@ -650,7 +650,7 @@ bool Player::deep_analysis(const Matrix &field, int iteration, std::array<int, 3
 std::array<int, 3> Player::make_move(const Field &field){
     Matrix matrix = field.bare_matrix();
     std::array<int, 3> move = {0};
-    std::array<int, 3> concede_move = {0};
+
     auto tmp_ = can_win(matrix);
     if (tmp_.second != 0){
         return tmp_.first;
@@ -659,6 +659,13 @@ std::array<int, 3> Player::make_move(const Field &field){
     if (deep_analysis(matrix, 0, &move)){
         return move;
     }
+
+    side *= -1;
+    if (deep_analysis(matrix, 0, &move)){
+        side *= -1;
+        return move;
+    }
+    side *= -1;
 
     std::vector< std::array<int, 3> > candidates;
     int counts[4][4][4] = {0};
@@ -676,14 +683,13 @@ std::array<int, 3> Player::make_move(const Field &field){
                     matrix.m[i][j][k] = 0;
 
                     if(max < counts[i][j][k]){
-                        concede_move = {max_index[0], max_index[1], max_index[2]};
                         max = counts[i][j][k];
                         max_index[0] = i; max_index[1] = j; max_index[2] = k;
                         candidates.clear();
                         candidates.emplace_back( std::array< int, 3 > {i, j, k} );
                     }
 
-                    if(max == counts[i][j][k]){
+                    else if(max == counts[i][j][k]){
                         candidates.emplace_back( std::array< int, 3 > {i, j, k} );
                     }
 
@@ -692,18 +698,27 @@ std::array<int, 3> Player::make_move(const Field &field){
         }
     }
 
-    side *= -1;
+//    for(int i = 0; i < candidates.size(); ++i){
+//        matrix.m[candidates[i][0]][candidates[i][1]][candidates[i][2]] = side;
+//
+//        side *= -1;
+//        if (deep_analysis(matrix, 0, &move)){
+//            matrix.m[candidates[i][0]][candidates[i][1]][candidates[i][2]] = 0;
+//            candidates.erase(candidates.begin() + i);
+//            side *= -1;
+//            continue;
+//        }
+//        side *= -1;
+//        matrix.m[candidates[i][0]][candidates[i][1]][candidates[i][2]] = 0;
+//    }
 
-    if (deep_analysis(matrix, 0, &move)){
-        side *= -1;
-        return move;
-    }
-
-    side *= -1;
+//    if(candidates.empty()){
+//        return move;
+//    }
 
     std::srand( time(nullptr) );
-
     return candidates[std::rand() % candidates.size()];
+//    return candidates[0];
 }
 
 Player::Player(int side) : side(side){}

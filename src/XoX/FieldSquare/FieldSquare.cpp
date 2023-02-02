@@ -20,6 +20,7 @@ bool FieldSquare::is_pushed(sf::Vector2<int> point) const{
 
 
 void FieldSquare::draw(sf::RenderWindow *window) const{
+
     window->draw(rectangle);
     float w = rectangle.getSize().x;
     float h = rectangle.getSize().y;
@@ -70,4 +71,10 @@ void FieldSquare::draw(sf::RenderWindow *window) const{
 FieldSquare::FieldSquare(const FieldSquare &fs) {
     rectangle = fs.rectangle;
     status = fs.status;
+}
+
+void FieldSquare::highlight(bool b) {
+    highlighted = b;
+    if (highlighted) rectangle.setFillColor(sf::Color(200, 200, 100));
+    else rectangle.setFillColor(sf::Color(120, 175, 85));
 }

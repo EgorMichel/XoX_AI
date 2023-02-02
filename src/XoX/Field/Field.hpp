@@ -16,7 +16,6 @@ struct Matrix {
 struct Field {
     FieldSquare matrix[4][4][4];
 public:
-
     Field() = default;
     Field(float ScreenWidth, float ScreenHeight);
     Field(Field const &f);

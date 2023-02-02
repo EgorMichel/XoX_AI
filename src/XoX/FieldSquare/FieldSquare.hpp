@@ -10,12 +10,14 @@
 class FieldSquare {
 private:
     sf::RectangleShape rectangle;
+    bool highlighted = false;
 public:
     int status = 0;     // 0 - empty; 1 - x; -1 - o;
     FieldSquare() = default;
     FieldSquare(float width, float height, float x, float y, float outline);
     FieldSquare(FieldSquare const & fs);
     bool is_pushed(sf::Vector2<int> point) const;
+    void highlight(bool b);
     void draw(sf::RenderWindow * window) const;
 };
 

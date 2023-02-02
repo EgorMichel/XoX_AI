@@ -50,6 +50,7 @@ void Field::refresh() {
         for(auto & j : i){
             for(auto & k : j){
                 k.status = 0;
+                k.highlight(false);
             }
         }
     }
