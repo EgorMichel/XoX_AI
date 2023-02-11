@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <array>
 #include "../FieldSquare/FieldSquare.hpp"
 
 struct Matrix {
